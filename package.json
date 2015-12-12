@@ -1,0 +1,19 @@
+{
+  "name": "secdemo",
+  "version": "0.0.1",
+  "description": "Demo of SQLi, XSS, and broken authentication for DD2395",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macaullyjamesmuir/secdemo.git"
+  },
+  "author": "Macaully James Muir",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/macaullyjamesmuir/secdemo/issues"
+  },
+  "homepage": "https://github.com/macaullyjamesmuir/secdemo#readme"
+}
