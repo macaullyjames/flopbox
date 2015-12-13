@@ -1,18 +1,23 @@
 $(function() {
-    $('#login-button').on('click', function() {
+    $('form').on('submit', function() {
         $.ajax({
             type: "PUT",
-            url: "localhost:8081/",
-            data: {
-                key: $('#key-input').val()
-            }
+            contentType:'application/json',
+            url: "http://localhost:8081/login",
+            data: JSON.stringify({key: $(this).children('input').val()})
         }).then(
             function(res) {
-                console.log(res);
+                sessionStorage.setItem('token', res.token)
             },
             function(res) {
-                console.log(res);
+                $('.error')
+                    .stop(true, true)
+                    .show()
+                    .delay(1000)
+                    .fadeOut(1000);
             }
         );
+        // Prevent the default behaviour
+        return false;
     });
 });

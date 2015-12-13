@@ -4,7 +4,7 @@ body {
     background-color: #EDEDED;
     font-family: 'Roboto', sans-serif;
 }
-#login-pane {
+main {
     width: 500px;
     padding: 20px;
     margin: 200px auto 0 auto;
@@ -17,7 +17,7 @@ h1 {
     font-weight: 200;
     margin-bottom: 20px;
 }
-#passcode-input {
+form {
     display: block;
     margin: 0 auto;
 }
