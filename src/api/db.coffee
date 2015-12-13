@@ -1,7 +1,7 @@
 module.exports = (dbName) ->
     sqlite3 = require "sqlite3"
 
-    db = new (sqlite3.Database)(dbName)
+    db = new (sqlite3.Database)("#{dbName}.db")
     db.serialize ->
         db.run """
             CREATE TABLE IF NOT EXISTS users (
