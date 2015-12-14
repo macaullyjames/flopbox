@@ -1,0 +1,44 @@
+body {
+    width: 100%;
+    margin: 0;
+    background-color: #EDEDED;
+    font-family: 'Roboto', sans-serif;
+}
+main {
+    width: 500px;
+    padding: 20px;
+    margin: 200px auto 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+}
+h1 {
+    font-size: 2em;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+form {
+    display: block;
+    margin: 0 auto;
+}
+input {
+    height: 30px;
+    width: 30px;
+    border: 0;
+    vertical-align: bottom;
+    box-sizing: border-box;
+    border-radius: 2px 0 0 2px;
+    font-size: 1.3em;
+    outline-width: 0;
+    text-align: center;
+}
+p {
+    margin: 1em;
+    font-weight: 200;
+    font-size: 0.8em;
+    line-height: 1.5;
+}
+.error {
+    color: rgb(209, 31, 39);
+    display: none;
+}

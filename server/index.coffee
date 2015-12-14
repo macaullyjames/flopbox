@@ -19,4 +19,14 @@ api.put "/login", (req, res) ->
         .then -> res.json token: token
         .catch -> res.status(401).send()
 
+api.put "/2fa", (req, res) ->
+    token     = req.body.token
+    challenge = req.body.challenge
+    sessions.get token
+        .catch -> res.status(401).send()
+        .then (row) -> throw "invalid token" if row.challenge isnt challenge
+        .then -> sessions.validate(token)
+        .then -> res.json success: yes
+        .catch -> res.status(400).send()
+
 api.listen 8081

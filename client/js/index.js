@@ -8,6 +8,7 @@ $(function() {
         }).then(
             function(res) {
                 sessionStorage.setItem('token', res.token)
+                window.location = "2fa.html"
             },
             function(res) {
                 $('.error')

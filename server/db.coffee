@@ -3,22 +3,24 @@ module.exports = (dbName) ->
 
     db = new (sqlite3.Database)("#{dbName}.db")
     db.serialize ->
+        db.run "DROP TABLE IF EXISTS users"
+        db.run "DROP TABLE IF EXISTS sessions"
         db.run """
             CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY_KEY,
+                id INTEGER PRIMARY KEY,
                 key TEXT
             )
             """
         db.run """
             CREATE TABLE IF NOT EXISTS sessions (
-                id integer primary_key,
-                user integer,
+                id INTEGER PRIMARY KEY,
+                user INTEGER,
                 token TEXT,
-                challenge INTEGER,
+                challenge TEXT,
                 valid BOOLEAN
             )
             """
-        db.run "INSERT INTO users (key) VALUES ('A92XS5SMiMvQETQAJuwv2jSP')"
+        db.run "INSERT INTO users (id, key) VALUES (null, 'A92XS5SMiMvQETQAJuwv2jSP')"
 
     users:
         get: (key) ->
@@ -28,12 +30,12 @@ module.exports = (dbName) ->
     sessions:
         add: (userID, token, challenge) ->
             new Promise (resolve, reject) ->
-                db.run "INSERT INTO sessions (user, token, challenge, valid) VALUES (?, ?, ?, ?)", [userID, token, challenge, "FALSE"], -> do resolve
+                db.run "INSERT INTO sessions (id, user, token, challenge, valid) VALUES (null, ?, ?, ?, ?)", [userID, token, challenge, 0], (err) -> do resolve
         get: (token) ->
             new Promise (resolve, reject) ->
-                db.run "SELECT * FROM sessions WHERE token = ?", token, (err, row) ->
+                db.get "SELECT * FROM sessions", (err, row) ->
                     if row? then resolve(row) else reject(err)
         validate: (token) ->
             new Promise (resolve, reject) ->
-                db.run "UPDATE sessions SET valid = TRUE WHERE token = ?", token, (err) ->
+                db.run "UPDATE sessions SET valid = 1 WHERE token = ?", token, (err) ->
                     if err? then reject(err) else do resolve
