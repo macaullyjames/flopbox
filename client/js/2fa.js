@@ -24,9 +24,12 @@ $(function() {
             type: "PUT",
             contentType:'application/json',
             url: 'http://localhost:8081/2fa',
+            beforeSend: function(xhr) {
+                var token = sessionStorage.getItem('token');
+                xhr.setRequestHeader('Authorization', token);
+            },
             data: JSON.stringify({
                 challenge: challenge,
-                token: sessionStorage.getItem('token')
             })
         }).then(
             function(res) {
