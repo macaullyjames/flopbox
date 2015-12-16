@@ -34,7 +34,7 @@ module.exports = (dbName) ->
                 db.run "INSERT INTO sessions (id, user, token, challenge, valid) VALUES (null, ?, ?, ?, ?)", [userID, token, challenge, 0], (err) -> do resolve
         get: (token) ->
             new Promise (resolve, reject) ->
-                db.get "SELECT * FROM sessions", (err, row) ->
+                db.get "SELECT * FROM sessions WHERE token = ?", token, (err, row) ->
                     if row? then resolve(row) else reject(err)
         validate: (token) ->
             new Promise (resolve, reject) ->
