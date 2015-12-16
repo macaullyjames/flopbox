@@ -4,6 +4,7 @@ cors       = require "cors"
 bodyParser = require "body-parser"
 randToken  = require "rand-token"
 fs         = require "fs"
+pad        = require "pad-left"
 auth       = require "./auth"
 
 {users, sessions} = require("./db") "flopbox"
@@ -16,7 +17,7 @@ api.use auth
 api.put "/login", (req, res) ->
     key       = req.body.key
     token     = randToken.generate 24
-    challenge = Math.floor 10000*Math.random()
+    challenge = pad("#{Math.floor 10000*Math.random()}", 4, 0)
     users.get key
         .then (row) -> sessions.add row.id, token, challenge
         .then -> res.json token: token
